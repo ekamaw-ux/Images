@@ -1,10 +1,10 @@
 {
   "pageCount": 26,
-  "sourceBytes": 3983653,
+  "sourceBytes": 3982771,
   "pages": [
     {
       "name": "page-001.pdf",
-      "bytes": 108852
+      "bytes": 108853
     },
     {
       "name": "page-002.pdf",
@@ -12,11 +12,11 @@
     },
     {
       "name": "page-003.pdf",
-      "bytes": 158472
+      "bytes": 158489
     },
     {
       "name": "page-004.pdf",
-      "bytes": 176673
+      "bytes": 176667
     },
     {
       "name": "page-005.pdf",
@@ -24,7 +24,7 @@
     },
     {
       "name": "page-006.pdf",
-      "bytes": 175668
+      "bytes": 175670
     },
     {
       "name": "page-007.pdf",
@@ -44,7 +44,7 @@
     },
     {
       "name": "page-011.pdf",
-      "bytes": 196979
+      "bytes": 196980
     },
     {
       "name": "page-012.pdf",
@@ -56,11 +56,11 @@
     },
     {
       "name": "page-014.pdf",
-      "bytes": 179294
+      "bytes": 178793
     },
     {
       "name": "page-015.pdf",
-      "bytes": 216575
+      "bytes": 216576
     },
     {
       "name": "page-016.pdf",
@@ -72,11 +72,11 @@
     },
     {
       "name": "page-018.pdf",
-      "bytes": 164601
+      "bytes": 164199
     },
     {
       "name": "page-019.pdf",
-      "bytes": 91902
+      "bytes": 91911
     },
     {
       "name": "page-020.pdf",
@@ -88,15 +88,15 @@
     },
     {
       "name": "page-022.pdf",
-      "bytes": 177479
+      "bytes": 177480
     },
     {
       "name": "page-023.pdf",
-      "bytes": 184577
+      "bytes": 184578
     },
     {
       "name": "page-024.pdf",
-      "bytes": 174793
+      "bytes": 174794
     },
     {
       "name": "page-025.pdf",
