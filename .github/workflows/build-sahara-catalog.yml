@@ -1,0 +1,57 @@
+name: Build Sahara photo catalogue
+
+on:
+  push:
+    branches:
+      - sahara-catalog-build
+    paths:
+      - 'sahara-catalog/render.js'
+      - 'sahara-catalog/package.json'
+      - '.github/workflows/build-sahara-catalog.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out catalogue branch
+        uses: actions/checkout@v4
+        with:
+          ref: sahara-catalog-build
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install renderer
+        working-directory: sahara-catalog
+        run: npm install --no-audit --no-fund
+
+      - name: Build PDF with live Shopify images and prices
+        working-directory: sahara-catalog
+        run: npm run build
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sahara_Product_Catalogue_With_Photos
+          path: sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf
+          retention-days: 7
+
+      - name: Commit generated catalogue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf sahara-catalog/catalogue-preview.html
+          if git diff --cached --quiet; then
+            echo "Catalogue unchanged"
+          else
+            git commit -m "Generate Sahara product catalogue with store photos"
+            git push origin HEAD:sahara-catalog-build
+          fi
