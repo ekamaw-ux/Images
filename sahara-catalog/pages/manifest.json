@@ -1,110 +1,110 @@
 {
   "pageCount": 26,
-  "sourceBytes": 101696473,
+  "sourceBytes": 3983653,
   "pages": [
     {
       "name": "page-001.pdf",
-      "bytes": 4345653
+      "bytes": 108853
     },
     {
       "name": "page-002.pdf",
-      "bytes": 81622
+      "bytes": 94484
     },
     {
       "name": "page-003.pdf",
-      "bytes": 3993632
+      "bytes": 158473
     },
     {
       "name": "page-004.pdf",
-      "bytes": 4362651
+      "bytes": 176673
     },
     {
       "name": "page-005.pdf",
-      "bytes": 6659605
+      "bytes": 175443
     },
     {
       "name": "page-006.pdf",
-      "bytes": 4933292
+      "bytes": 175669
     },
     {
       "name": "page-007.pdf",
-      "bytes": 3503869
+      "bytes": 149353
     },
     {
       "name": "page-008.pdf",
-      "bytes": 4460491
+      "bytes": 167059
     },
     {
       "name": "page-009.pdf",
-      "bytes": 2994517
+      "bytes": 126557
     },
     {
       "name": "page-010.pdf",
-      "bytes": 2506285
+      "bytes": 108498
     },
     {
       "name": "page-011.pdf",
-      "bytes": 6941883
+      "bytes": 196980
     },
     {
       "name": "page-012.pdf",
-      "bytes": 972261
+      "bytes": 68210
     },
     {
       "name": "page-013.pdf",
-      "bytes": 3780002
+      "bytes": 185021
     },
     {
       "name": "page-014.pdf",
-      "bytes": 3713715
+      "bytes": 179294
     },
     {
       "name": "page-015.pdf",
-      "bytes": 4790092
+      "bytes": 216575
     },
     {
       "name": "page-016.pdf",
-      "bytes": 5013358
+      "bytes": 203036
     },
     {
       "name": "page-017.pdf",
-      "bytes": 5674846
+      "bytes": 228660
     },
     {
       "name": "page-018.pdf",
-      "bytes": 3290289
+      "bytes": 164601
     },
     {
       "name": "page-019.pdf",
-      "bytes": 1522085
+      "bytes": 91902
     },
     {
       "name": "page-020.pdf",
-      "bytes": 4911202
+      "bytes": 177243
     },
     {
       "name": "page-021.pdf",
-      "bytes": 5743282
+      "bytes": 179762
     },
     {
       "name": "page-022.pdf",
-      "bytes": 5296890
+      "bytes": 177480
     },
     {
       "name": "page-023.pdf",
-      "bytes": 5967925
+      "bytes": 184578
     },
     {
       "name": "page-024.pdf",
-      "bytes": 5917453
+      "bytes": 174794
     },
     {
       "name": "page-025.pdf",
-      "bytes": 1352529
+      "bytes": 62190
     },
     {
       "name": "page-026.pdf",
-      "bytes": 56154
+      "bytes": 67594
     }
   ]
 }
