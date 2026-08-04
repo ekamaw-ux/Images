@@ -1,0 +1,12 @@
+{
+  "name": "sahara-product-catalogue",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node render.js"
+  },
+  "dependencies": {
+    "puppeteer": "24.16.0",
+    "qrcode": "1.5.4"
+  }
+}
