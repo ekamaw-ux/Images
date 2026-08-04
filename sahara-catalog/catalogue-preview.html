@@ -1,0 +1,1743 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sahara Product Catalogue</title>
+    <style>
+      @page { size: A4; margin: 0; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: #fffdf9; color: #17140f; }
+      body { font-family: Arial, Helvetica, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; page-break-after: always; background: #fffdf9; }
+      .page:last-child { page-break-after: auto; }
+      .kicker { font-size: 8.5pt; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: #b98b4f; }
+      h1, h2, h3, p { margin: 0; }
+      .page-header { height: 29mm; margin: 0 15mm; padding-top: 12mm; display: flex; align-items: flex-start; justify-content: space-between; border-bottom: .35mm solid #d8cdbd; }
+      .page-header h2 { margin-top: 2.5mm; font-family: Georgia, 'Times New Roman', serif; font-size: 22pt; line-height: 1; }
+      .page-brand { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 15pt; color: #24483b; letter-spacing: 1px; }
+      .footer { position: absolute; left: 15mm; right: 15mm; bottom: 7mm; height: 6mm; display: flex; justify-content: space-between; align-items: flex-end; border-top: .3mm solid #d8cdbd; padding-top: 2.2mm; color: #6e665e; font-size: 6.8pt; letter-spacing: .15px; }
+
+      .cover-page { background: #fffdf9; }
+      .cover-top { height: 80mm; background: #24483b; color: white; text-align: center; padding-top: 23mm; }
+      .cover-brand { font-family: Georgia, 'Times New Roman', serif; font-size: 35pt; font-weight: 700; letter-spacing: 1.5px; }
+      .cover-tagline { margin-top: 7mm; font-size: 9pt; font-weight: 700; letter-spacing: 1.2px; }
+      .cover-body { display: grid; grid-template-columns: 43% 57%; height: 151mm; }
+      .cover-copy { padding: 25mm 8mm 0 18mm; }
+      .cover-copy h1 { margin-top: 5mm; font-family: Georgia, 'Times New Roman', serif; font-size: 34pt; line-height: 1.02; letter-spacing: -1px; }
+      .cover-copy p { margin-top: 13mm; color: #6e665e; font-size: 11pt; line-height: 1.5; }
+      .cover-meta { margin-top: 13mm; color: #24483b; font-size: 8pt; font-weight: 800; letter-spacing: 1.1px; }
+      .cover-gallery { position: relative; margin: 12mm 10mm 0 2mm; }
+      .hero { position: absolute; overflow: hidden; border-radius: 3.5mm; box-shadow: 0 3mm 10mm rgba(23,20,15,.13); background: #efe5d6; }
+      .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .hero-1 { left: 0; top: 0; width: 62mm; height: 72mm; z-index: 2; }
+      .hero-2 { right: 0; top: 22mm; width: 52mm; height: 75mm; z-index: 3; }
+      .hero-3 { left: 17mm; top: 80mm; width: 65mm; height: 55mm; z-index: 1; }
+      .cover-contact { position: absolute; left: 18mm; right: 18mm; bottom: 13mm; height: 43mm; border-radius: 4mm; background: #efe5d6; display: flex; justify-content: space-between; align-items: center; padding: 7mm 8mm; }
+      .cover-contact > div:first-child { display: flex; flex-direction: column; gap: 2.5mm; color: #6e665e; font-size: 8.5pt; }
+      .cover-contact strong { color: #17140f; font-size: 9.5pt; }
+      .cover-qr { display: flex; flex-direction: column; align-items: center; gap: 1.2mm; color: #6e665e; font-size: 6pt; }
+      .cover-qr img { width: 25mm; height: 25mm; background: white; padding: 1mm; }
+
+      .intro-page { padding-bottom: 18mm; }
+      .intro-lead { margin: 11mm 15mm 0; width: 150mm; }
+      .intro-lead p { font-family: Georgia, 'Times New Roman', serif; font-size: 20pt; line-height: 1.35; }
+      .intro-columns { margin: 12mm 15mm 0; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+      .intro-panel { background: #f7f1e7; border: .3mm solid #d8cdbd; padding: 6mm; min-height: 34mm; }
+      .intro-panel h3 { font-size: 10pt; text-transform: uppercase; letter-spacing: .6px; color: #24483b; }
+      .intro-panel p { margin-top: 3mm; font-size: 9pt; line-height: 1.45; }
+      .collection-list { margin: 10mm 15mm 0; border-top: .35mm solid #d8cdbd; }
+      .collection-row { height: 11mm; display: grid; grid-template-columns: 12mm 1fr 30mm; align-items: center; border-bottom: .3mm solid #d8cdbd; }
+      .collection-row span { color: #b98b4f; font-size: 8pt; font-weight: 800; }
+      .collection-row strong { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt; }
+      .collection-row em { justify-self: end; font-size: 7.5pt; color: #6e665e; font-style: normal; }
+      .ordering-note { margin: 9mm 15mm 0; background: #24483b; color: white; padding: 6mm 7mm; border-radius: 2mm; }
+      .ordering-note strong { text-transform: uppercase; font-size: 8pt; letter-spacing: .7px; }
+      .ordering-note p { margin-top: 2.5mm; font-size: 8.2pt; line-height: 1.5; opacity: .94; }
+
+      .catalogue-page { padding-bottom: 18mm; }
+      .product-grid { height: 243mm; margin: 7mm 15mm 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6mm; }
+      .product-card { min-height: 0; border: .3mm solid #d8cdbd; border-radius: 3mm; overflow: hidden; background: white; display: grid; grid-template-rows: 84mm 1fr; box-shadow: 0 1.5mm 5mm rgba(23,20,15,.045); }
+      .product-image-wrap { position: relative; overflow: hidden; background: #f7f1e7; }
+      .product-image { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: cover; display: block; }
+      .image-fallback { position: absolute; inset: 0; display: grid; place-items: center; color: #b98b4f; font-family: Georgia, 'Times New Roman', serif; font-size: 18pt; z-index: 1; }
+      .product-copy { padding: 5mm 5.2mm 4.5mm; display: flex; flex-direction: column; min-height: 0; }
+      .product-type { color: #b98b4f; font-size: 6.8pt; text-transform: uppercase; letter-spacing: .9px; font-weight: 800; height: 4mm; overflow: hidden; }
+      .product-copy h3 { margin-top: 2.4mm; font-family: Georgia, 'Times New Roman', serif; font-size: 13.5pt; line-height: 1.16; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .product-bottom { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; border-top: .3mm solid #d8cdbd; padding-top: 3.2mm; gap: 3mm; }
+      .price { color: #24483b; font-size: 11pt; font-weight: 800; }
+      .small-batch { color: #6e665e; font-size: 5.8pt; letter-spacing: .65px; white-space: nowrap; }
+
+      .enquiry-page { padding-bottom: 18mm; }
+      .enquiry-lead { margin: 10mm 15mm 0; color: #6e665e; font-size: 10pt; line-height: 1.5; width: 160mm; }
+      .enquiry-table { border-collapse: collapse; width: 180mm; margin: 10mm 15mm 0; table-layout: fixed; }
+      .enquiry-table th, .enquiry-table td { border: .3mm solid #d8cdbd; }
+      .enquiry-table th { height: 11mm; padding: 0 3mm; text-align: left; background: #24483b; color: white; font-size: 7pt; text-transform: uppercase; letter-spacing: .4px; }
+      .enquiry-table th:nth-child(1) { width: 67mm; }
+      .enquiry-table th:nth-child(2) { width: 18mm; }
+      .enquiry-table th:nth-child(3) { width: 48mm; }
+      .enquiry-table td { height: 12mm; background: white; }
+      .closing-card { margin: 10mm 15mm 0; background: #efe5d6; border-radius: 3mm; padding: 7mm; display: flex; justify-content: space-between; align-items: center; }
+      .closing-card h3 { margin-top: 2.5mm; font-family: Georgia, 'Times New Roman', serif; font-size: 20pt; }
+      .closing-card p { margin-top: 3mm; color: #6e665e; font-size: 8.5pt; line-height: 1.6; }
+      .closing-qr { display: flex; flex-direction: column; align-items: center; gap: 2mm; font-size: 6pt; color: #6e665e; letter-spacing: .4px; }
+      .closing-qr img { width: 29mm; height: 29mm; background: white; padding: 1.2mm; }
+    </style>
+  </head>
+  <body>
+    <section class="page cover-page">
+      <div class="cover-top">
+        <div class="cover-brand">SAHARA</div>
+        <div class="cover-tagline">CURATED IN AFRICA · PREPARED IN THE UAE</div>
+      </div>
+      <div class="cover-body">
+        <div class="cover-copy">
+          <div class="kicker">CURRENT RETAIL EDITION</div>
+          <h1>PRODUCT<br/>CATALOGUE</h1>
+          <p>Handmade objects, gifting, adornment and small-batch pieces selected with care for homes, hospitality spaces and distinctive retail.</p>
+          <div class="cover-meta">LIVE STORE PRICES · AED · 2026</div>
+        </div>
+        <div class="cover-gallery">
+          
+            <div class="hero hero-1">
+              <img src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-beaded-wood-napkin-holder-hero_94e917ae-0c82-4480-bc0f-041ae974a237.png?v=1783914124&amp;width=1000" alt="Beaded Wooden Napkin Holder" />
+            </div>
+            <div class="hero hero-2">
+              <img src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-wooden-buffalo-hero_5adf6d94-0dfc-4e7a-9484-ae98de8fa64d.png?v=1785719051&amp;width=1000" alt="Hand-Carved Wooden Buffalo Sculpture — One of One" />
+            </div>
+            <div class="hero hero-3">
+              <img src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-woven-hat-tote-navy.jpg?v=1783697865&amp;width=1000" alt="Handwoven Sisal Hat &amp; Tote Set — Four Colours" />
+            </div>
+        </div>
+      </div>
+      <div class="cover-contact">
+        <div>
+          <strong>SAHARA SHOPPING</strong>
+          <span>sahara.shopping &nbsp; | &nbsp; +971 52 194 8311</span>
+          <span>hello@sahara.shopping &nbsp; | &nbsp; Sharjah, UAE</span>
+        </div>
+        <div class="cover-qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAGkCAYAAAB+TFE1AAAAAklEQVR4AewaftIAAAl3SURBVO3B0YlkOxIFwDNJG6Afgfy3TqAfeTD7TNiugrlZVET8+fufAMDDKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA08JM3rTnCZ9nn5ilrjjxln5unrDnyjn1unrLmyKv2uXnHmiN8ln1uXlUBgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIGfPGyfG35nzRH+vTVHnrLmyFP2uflU+9zwO2uOPKUCAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGvjJB1tz5FPtc/OJ1hx50j43T9nn5ilrjvBvrTnyqfa5+UQVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4CXyQNUf4nX1u4BNUAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAM/gX9on5unrDnyjn1unrLmyFPWHHnVPjfw/6oAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0MBPPtg+N3yXNUdetc/Np9rn5lVrjvB7+9zwb1UAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz952Joj8AnWHHnVPjfvWHPkVfvcvGPNkU+15gifowIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz950z438P9ac4Tf2+fmKfvcPGWfG75HBQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADTwkzetOfKOfW5eteYIv7fPzav2uXnHmiPfaM2Rb7TPzTvWHOH39rn5RBUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGvjJF9vnhn9rn5tPtc/NU9YcedU+N+9Yc+Qp+9y8Y82RV+1z86nWHHnVPjdPqQBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwJ+//8mD1hx51T43T1lz5Bvtc/Op1hx5xz43n2jNkXfsc/OUNUe+0T4371hz5Cn73LyqAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4yZvWHOH39rl5ypojr1pz5En73Lxqn5t3rDnyqn1unrLPzTvWHPlU+9x8o31uXrXmyFMqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADTw5+9/8qXWHHnVPjfvWHPkE+1z86Q1R/idfW6esubIt9rn5lVrjnyqfW5eVQGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgAN/Pn7n7xhzZF37HPzqjVH3rHPDb+z5sg79rn5RmuOvGOfG35vzZFX7XPzjjVHXrXPzTvWHHnVPjdPqQBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE++2JojT9nn5lVrjrxjn5tvtObIU/a5ecqaI0/Z5+ZTrTnyjdYcecc+N6+qAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAZ+8sH2uflG+9y8Y82Rp6w58qn2uXnKmiNP2efmKWuOfKp9bp6yz82r1hx5SgUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABn7ywdYceco+N09Zc+Qd+9y8as2RJ+1z86o1R56y5sinWnOEf2vNkXfsc/OqfW6eUgGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgAN/Pn7n8D/ac2RT7XPzTvWHHnKPjevWnPkKfvcfKo1R56yz803qgBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE/etOYIn2Wfm1ftc/Ot9rl51Zoj71hz5FX73LxjzZGnrDnyjn1unrLPzavWHPlU+9y8qgIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz952D43/M6aI09Zc+RJ+9w8Zc2RV+1zw+/tc/Op1hx51T4371hz5FX73DylAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4yQdbc+RT7XPD76058qp9bp6y5sg3WnPkW+1z86o1R56y5sg79rl5VQUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABn4C/9A+N+9Yc+Qp+9x8ojVHvtU+N69ac+Qda47wOxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE/gS6w5wu/tc/ON9rl5x5ojT9nn5lVrjjylAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADP/lg+9zwb+1z8441R96xz82r1hx5xz43T1lz5FX73LxjzZFX7XPzjjVHvtE+N9+oAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4ycPWHOFzrDnyrdYcedU+N+/Y5+Yp+9y8as0Rfm/NkW9UAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBP3//EwB4WAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA08D9v/HbqpeT65QAAAABJRU5ErkJggg==" alt="Scan Sahara Shopping"/><small>SCAN STORE</small></div>
+      </div>
+    </section>
+
+    <section class="page intro-page">
+      <header class="page-header intro-header">
+        <div>
+          <div class="kicker">THE SAHARA EDIT</div>
+          <h2>Objects with a story</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="intro-lead">
+        <p>Sahara curates African jewellery, gifts, woven craft and home pieces in small quantities, then prepares each order locally in the UAE.</p>
+      </div>
+      <div class="intro-columns">
+        <div class="intro-panel">
+          <h3>For retail</h3>
+          <p>Gift stores, concept shops, museum retail, boutiques and handmade-product specialists.</p>
+        </div>
+        <div class="intro-panel">
+          <h3>For hospitality</h3>
+          <p>Cafés, restaurants, hotels, lounges, spas, guest gifting and distinctive reception styling.</p>
+        </div>
+      </div>
+      <div class="collection-list">
+      <div class="collection-row">
+        <span>01</span>
+        <strong>Home &amp; Hospitality</strong>
+        <em>16 products</em>
+      </div>
+      <div class="collection-row">
+        <span>02</span>
+        <strong>Gifts &amp; Complete Sets</strong>
+        <em>15 products</em>
+      </div>
+      <div class="collection-row">
+        <span>03</span>
+        <strong>Woven &amp; Carry</strong>
+        <em>5 products</em>
+      </div>
+      <div class="collection-row">
+        <span>04</span>
+        <strong>Jewellery &amp; Accessories</strong>
+        <em>24 products</em>
+      </div>
+      <div class="collection-row">
+        <span>05</span>
+        <strong>Scarves &amp; Wearables</strong>
+        <em>2 products</em>
+      </div>
+      <div class="collection-row">
+        <span>06</span>
+        <strong>Artisan Sandals</strong>
+        <em>21 products</em>
+      </div></div>
+      <div class="ordering-note">
+        <strong>Ordering note</strong>
+        <p>Prices shown are the current live selling prices on sahara.shopping. Availability is small-batch and may change. Wholesale, consignment, venue quantities and custom sourcing are quoted separately after the buyer confirms the required products and quantities.</p>
+      </div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>2</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Home &amp; Hospitality</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/image_0ac21ac4-4e89-4f2f-9ed3-a65a73c312d5.png?v=1784771287&amp;width=900" alt="Artisan Kitchen Gift Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Artisan Kitchen Gift Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 250</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/30c011d1-e1cb-46b2-809e-31f98fbdce9b.jpg?v=1784785414&amp;width=900" alt="Azure Muse Coaster Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Home &amp; Hospitality</div>
+        <h3>Azure Muse Coaster Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 130</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-beaded-wood-napkin-holder-hero_94e917ae-0c82-4480-bc0f-041ae974a237.png?v=1783914124&amp;width=900" alt="Beaded Wooden Napkin Holder" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Napkin Holder</div>
+        <h3>Beaded Wooden Napkin Holder</h3>
+        <div class="product-bottom">
+          <span class="price">AED 100</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-elephant-pair-1.jpg?v=1784131591&amp;width=900" alt="Black Elephant Pair Sculpture — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sculpture</div>
+        <h3>Black Elephant Pair Sculpture — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 159</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>3</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Home &amp; Hospitality</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-ivory-salt-pepper-1_a2cc4200-7751-494d-8660-1425b00f984e.jpg?v=1783915160&amp;width=900" alt="Carved Ivory-Tone Salt &amp; Pepper Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Salt &amp; Pepper Set</div>
+        <h3>Carved Ivory-Tone Salt &amp; Pepper Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 80</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-wooden-buffalo-hero_5adf6d94-0dfc-4e7a-9484-ae98de8fa64d.png?v=1785719051&amp;width=900" alt="Hand-Carved Wooden Buffalo Sculpture — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sculpture</div>
+        <h3>Hand-Carved Wooden Buffalo Sculpture — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 250</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-safari-sculpture-zebra.jpg?v=1783698859&amp;width=900" alt="Hand-Finished Safari Sculpture" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sculpture</div>
+        <h3>Hand-Finished Safari Sculpture</h3>
+        <div class="product-bottom">
+          <span class="price">AED 120</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-soapstone-trinket-box-lifestyle_62f210cd-9039-4de6-9e9e-2d7d2a0f9f10.jpg?v=1783912475&amp;width=900" alt="Hand-Painted Soapstone Safari Coaster Set — Assorted Motifs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Soapstone Coaster Set</div>
+        <h3>Hand-Painted Soapstone Safari Coaster Set — Assorted Motifs</h3>
+        <div class="product-bottom">
+          <span class="price">AED 130</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>4</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Home &amp; Hospitality</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-handpainted-ashtray-1_1efc28cc-6ad5-4a81-affa-1dba4444a7e0.jpg?v=1783913698&amp;width=900" alt="Hand-Painted Wooden Safari Ashtrays — Assorted Motifs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Wooden Ashtray</div>
+        <h3>Hand-Painted Wooden Safari Ashtrays — Assorted Motifs</h3>
+        <div class="product-bottom">
+          <span class="price">AED 69</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-mini-sisal-baskets.jpg?v=1783698047&amp;width=900" alt="Handwoven Mini Sisal Basket — Assorted Weaves" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Basket</div>
+        <h3>Handwoven Mini Sisal Basket — Assorted Weaves</h3>
+        <div class="product-bottom">
+          <span class="price">AED 80</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-maasai-couple-sculpture-1.jpg?v=1785723294&amp;width=900" alt="Maasai Sculpture Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sculpture Set</div>
+        <h3>Maasai Sculpture Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 150</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-mini-animal-sculptures.jpg?v=1783697991&amp;width=900" alt="Mini Painted Animal Sculpture" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Mini Sculpture</div>
+        <h3>Mini Painted Animal Sculpture</h3>
+        <div class="product-bottom">
+          <span class="price">AED 40</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>5</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Home &amp; Hospitality</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-painted-candle-pot-orange_8dd97aae-f49d-41df-a277-ba66962cd4b2.jpg?v=1783728012&amp;width=900" alt="Painted Candle Pot — Assorted Design" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Candle Holder</div>
+        <h3>Painted Candle Pot — Assorted Design</h3>
+        <div class="product-bottom">
+          <span class="price">AED 70</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/savannah-table-set-hero_e53762de-afd6-4e98-99fd-431df4d9b28a.png?v=1784767021&amp;width=900" alt="The Savannah Table Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>The Savannah Table Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 240</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-bronze-beaded-keepsake-pot.jpg?v=1783701321&amp;width=900" alt="The Savannah Treasure Pot" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Decorative Keepsake Pot</div>
+        <h3>The Savannah Treasure Pot</h3>
+        <div class="product-bottom">
+          <span class="price">AED 150</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-turquoise-elephant-1.jpg?v=1784131630&amp;width=900" alt="Turquoise Patina Elephant Sculpture — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sculpture</div>
+        <h3>Turquoise Patina Elephant Sculpture — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 129</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>6</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Gifts &amp; Complete Sets</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-curated-african-accessories-gift-set_60872b53-514d-49a6-bb2a-cdcd1945b333.jpg?v=1784130688&amp;width=900" alt="Adorned Heritage Gift Box" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Adorned Heritage Gift Box</h3>
+        <div class="product-bottom">
+          <span class="price">AED 200</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sah-mag-set-005-collection_c82e6091-0287-4c3d-b093-5d6ac3ef633b.png?v=1783904893&amp;width=900" alt="African Story Fridge Magnets" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Fridge Magnet</div>
+        <h3>African Story Fridge Magnets</h3>
+        <div class="product-bottom">
+          <span class="price">AED 20</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/blush-bloom-set.png?v=1784588130&amp;width=900" alt="Blush Bloom Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Blush Bloom Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-heritage-set-1_589c50d6-c6c3-44f1-8db6-30a965092093.jpg?v=1783917443&amp;width=900" alt="Curated in UAE — The Heritage Sets" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Curated in UAE — The Heritage Sets</h3>
+        <div class="product-bottom">
+          <span class="price">AED 150</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>7</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Gifts &amp; Complete Sets</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-dashiki-folding-fan-1_156f3899-7371-466b-b18c-48e3456852b3.jpg?v=1783923420&amp;width=900" alt="Dashiki Print Folding Fan" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Folding Fan</div>
+        <h3>Dashiki Print Folding Fan</h3>
+        <div class="product-bottom">
+          <span class="price">AED 70</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/emerald-luxe-set.png?v=1784588106&amp;width=900" alt="Emerald Luxe Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Emerald Luxe Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/emerald-oasis-set_157450d3-10e4-4220-bda1-329a642737a9.png?v=1784588237&amp;width=900" alt="Emerald Oasis Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Emerald Oasis Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 150</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-heart-of-the-lion-gift-pack_6727c1e5-1e85-489b-9fe8-7fb5d402a540.jpg?v=1784130541&amp;width=900" alt="Heart of the Lion" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Heart of the Lion</h3>
+        <div class="product-bottom">
+          <span class="price">AED 300</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>8</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Gifts &amp; Complete Sets</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/midnight-bloom-set.png?v=1784588120&amp;width=900" alt="Midnight Bloom Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Midnight Bloom Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/pearl-bloom-set.png?v=1784588149&amp;width=900" alt="Pearl Bloom Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Pearl Bloom Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/royal-orchid-set.png?v=1784588090&amp;width=900" alt="Royal Orchid Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Royal Orchid Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/savannah-gold-set.png?v=1784588081&amp;width=900" alt="Savannah Gold Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Savannah Gold Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>9</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Gifts &amp; Complete Sets</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sky-bloom-set.png?v=1784588063&amp;width=900" alt="Sky Bloom Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Sky Bloom Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/FullSizeRender_41ab88c6-83d7-44ec-83e9-6dd2f1e83063.jpg?v=1784788500&amp;width=900" alt="Striped Spirit Gift Pack" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Striped Spirit Gift Pack</h3>
+        <div class="product-bottom">
+          <span class="price">AED 250</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sunset-bloom-set.png?v=1784588072&amp;width=900" alt="Sunset Bloom Set — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Gift Set</div>
+        <h3>Sunset Bloom Set — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>10</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Woven &amp; Carry</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-woven-hat-tote-navy.jpg?v=1783697865&amp;width=900" alt="Handwoven Sisal Hat &amp; Tote Set — Four Colours" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Woven Set</div>
+        <h3>Handwoven Sisal Hat &amp; Tote Set — Four Colours</h3>
+        <div class="product-bottom">
+          <span class="price">AED 250</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-navy-hat-1.jpg?v=1784132031&amp;width=900" alt="Handwoven Sisal Sun Hat — Four Colours" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Hat</div>
+        <h3>Handwoven Sisal Sun Hat — Four Colours</h3>
+        <div class="product-bottom">
+          <span class="price">AED 129</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-navy-tote-1.jpg?v=1784132049&amp;width=900" alt="Handwoven Sisal Tote Bag — Four Colours" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Tote Bag</div>
+        <h3>Handwoven Sisal Tote Bag — Four Colours</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-leather-wallet-brown.jpg?v=1783698224&amp;width=900" alt="Sahara Leather Wallet" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Wallet</div>
+        <h3>Sahara Leather Wallet</h3>
+        <div class="product-bottom">
+          <span class="price">AED 90</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>11</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Woven &amp; Carry</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-woven-crossbody-hero_80762b19-9905-4088-a571-15358271b1bf.png?v=1785719024&amp;width=900" alt="Woven Crossbody Bag — One of One" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Crossbody Bag</div>
+        <h3>Woven Crossbody Bag — One of One</h3>
+        <div class="product-bottom">
+          <span class="price">AED 160</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>12</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/c6147aae-f71a-45d8-bc21-d115e72cc1f0.jpg?v=1784785615&amp;width=900" alt="Azure Muse Beaded Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Jewellery &amp; Accessories</div>
+        <h3>Azure Muse Beaded Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 80</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-beaded-cuff-2_98294cbf-48cd-44d5-82d3-3ac44dcf9acf.jpg?v=1783915762&amp;width=900" alt="Beaded Cuff &amp; Bracelet Collection" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Beaded Bracelet</div>
+        <h3>Beaded Cuff &amp; Bracelet Collection</h3>
+        <div class="product-bottom">
+          <span class="price">AED 60</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/7f683990-526b-431c-a528-6d015ca07f87.jpg?v=1783982959&amp;width=900" alt="Black Carved Bone Comb Drop Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Black Carved Bone Comb Drop Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/433863ba-01a5-407e-90d2-6fcda475b210.jpg?v=1783987295&amp;width=900" alt="Black Polka Dot Diamond Tile &amp; Cowrie Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Black Polka Dot Diamond Tile &amp; Cowrie Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>13</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/0cfb1176-42ae-49c8-ad2b-7089e8fe34fe.jpg?v=1783987243&amp;width=900" alt="Black Polka Dot Teardrop Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Black Polka Dot Teardrop Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/421b18e4-a950-481d-8e62-db2f0307171c.jpg?v=1783979249&amp;width=900" alt="Buffalo Soldier Keychain" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Keychain</div>
+        <h3>Buffalo Soldier Keychain</h3>
+        <div class="product-bottom">
+          <span class="price">AED 35</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/22dbba7e-8227-4560-bf4b-1b4b1e50c880_cc82fcef-b351-4c84-a0b2-605e3ff73eb0.jpg?v=1783978959&amp;width=900" alt="Calabash Carved Keychain" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Keychain</div>
+        <h3>Calabash Carved Keychain</h3>
+        <div class="product-bottom">
+          <span class="price">AED 35</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sah-key-001-zebra-keychain.png?v=1783904956&amp;width=900" alt="Carved Artisan Keychains — Six Designs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Keychain</div>
+        <h3>Carved Artisan Keychains — Six Designs</h3>
+        <div class="product-bottom">
+          <span class="price">From AED 29</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>14</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-carved-bone-bracelet-1.jpg?v=1784129102&amp;width=900" alt="Carved Bone Tile Bracelet — Four Designs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Bracelet</div>
+        <h3>Carved Bone Tile Bracelet — Four Designs</h3>
+        <div class="product-bottom">
+          <span class="price">AED 89</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-wrapped-metal-cuff-bracelets_1d586ac4-f547-44eb-8db3-4f28b3eda5f7.jpg?v=1783724519&amp;width=900" alt="Copper Cuff — Warm Tone" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Cuff Bracelet</div>
+        <h3>Copper Cuff — Warm Tone</h3>
+        <div class="product-bottom">
+          <span class="price">AED 80</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/5d840c9f-4a83-4081-a1c3-68f5ae2b927f.jpg?v=1784126531&amp;width=900" alt="Cowrie Shell Bracelet" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Bracelet</div>
+        <h3>Cowrie Shell Bracelet</h3>
+        <div class="product-bottom">
+          <span class="price">AED 55</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/4788f361-eede-401a-9ccf-a8b1d9cc25f8.jpg?v=1783977806&amp;width=900" alt="Cowrie Shell Leather Keychain" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Keychain</div>
+        <h3>Cowrie Shell Leather Keychain</h3>
+        <div class="product-bottom">
+          <span class="price">AED 35</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>15</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/6af8dca6-f98f-439e-ad10-156cfb8a73a6.jpg?v=1783987345&amp;width=900" alt="Dark Carved Bone Feather Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Dark Carved Bone Feather Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/218fe368-3dcc-4dff-8e87-077e09d95c55.jpg?v=1784794074&amp;width=900" alt="Desert Amber Set — The Muse Collection" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Jewelry Set</div>
+        <h3>Desert Amber Set — The Muse Collection</h3>
+        <div class="product-bottom">
+          <span class="price">AED 230</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-beaded-headband-8.jpg?v=1784129879&amp;width=900" alt="Hand-Beaded Statement Headband — Four Designs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Hair Accessory</div>
+        <h3>Hand-Beaded Statement Headband — Four Designs</h3>
+        <div class="product-bottom">
+          <span class="price">AED 99</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-waist-beads-assorted-1.jpg?v=1784131157&amp;width=900" alt="Hand-Beaded Waist Beads — Assorted Colours" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Waist Beads</div>
+        <h3>Hand-Beaded Waist Beads — Assorted Colours</h3>
+        <div class="product-bottom">
+          <span class="price">AED 49</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>16</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-assorted-waist-beads_9f807cf0-11fd-4974-9a3b-a74ad8b8c0ae.jpg?v=1783724503&amp;width=900" alt="Hand-Beaded Waist Strands — Assorted Colours" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Waist Beads</div>
+        <h3>Hand-Beaded Waist Strands — Assorted Colours</h3>
+        <div class="product-bottom">
+          <span class="price">AED 50</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/da9e25bb-84cb-427e-9133-9e58940788dc.jpg?v=1783982805&amp;width=900" alt="Ivory Bone Drop Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Ivory Bone Drop Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/70166f48-9896-4281-a9d6-4e3942dd08aa.jpg?v=1783987028&amp;width=900" alt="Ivory Triangle Bone Drop Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Ivory Triangle Bone Drop Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/20dfc824-1ade-4f06-ba8a-08ea810560ab.jpg?v=1783982866&amp;width=900" alt="Maasai Beaded Cowrie Hoop Earrings" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>Maasai Beaded Cowrie Hoop Earrings</h3>
+        <div class="product-bottom">
+          <span class="price">AED 45</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>17</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Jewellery &amp; Accessories</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/6969573e-7f8d-40fc-9275-6148b2ad48cc.jpg?v=1784794324&amp;width=900" alt="Royal Amber Set — The Muse Collection" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Jewelry Set</div>
+        <h3>Royal Amber Set — The Muse Collection</h3>
+        <div class="product-bottom">
+          <span class="price">AED 230</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-red-cowrie-beaded-earrings_7ec3b43f-ac90-4281-aa6c-398ac5c47b59.jpg?v=1783728018&amp;width=900" alt="SAH-EAR Statement Earrings — Two Designs" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Earrings</div>
+        <h3>SAH-EAR Statement Earrings — Two Designs</h3>
+        <div class="product-bottom">
+          <span class="price">From AED 60</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/FullSizeRender_8b868369-d3f2-431a-9efe-5696538a5f93.jpg?v=1784778480&amp;width=900" alt="The Cobalt Muse Set" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Jewelry Set</div>
+        <h3>The Cobalt Muse Set</h3>
+        <div class="product-bottom">
+          <span class="price">AED 230</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/FullSizeRender_f20bf697-6d26-4591-8465-c5f4ae8e98ea.jpg?v=1784776048&amp;width=900" alt="The Lumière Set — Lady in White" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Jewelry Set</div>
+        <h3>The Lumière Set — Lady in White</h3>
+        <div class="product-bottom">
+          <span class="price">AED 180</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>18</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Scarves &amp; Wearables</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/image_03706cfc-ed05-4843-bbdb-c818fb7c9023.png?v=1784815347&amp;width=900" alt="Printed Pareo — Limited Drop" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Pareo</div>
+        <h3>Printed Pareo — Limited Drop</h3>
+        <div class="product-bottom">
+          <span class="price">AED 130</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-silk-scarf-chain-print-studio_367607b4-c4ce-4caa-a211-d867442d4957.png?v=1784812469&amp;width=900" alt="Silk Scarf — Current Print Drop" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Scarf</div>
+        <h3>Silk Scarf — Current Print Drop</h3>
+        <div class="product-bottom">
+          <span class="price">AED 100</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>19</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">CURRENT RETAIL COLLECTION</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-bronze-sun-disc-sandals-38-1.jpg?v=1784135382&amp;width=900" alt="Bronze Sun Disc Sandals — EU 38" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Bronze Sun Disc Sandals — EU 38</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-13.jpg?v=1784137062&amp;width=900" alt="Dhahabu Bronze Cuff Leather Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Dhahabu Bronze Cuff Leather Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-09.jpg?v=1784137027&amp;width=900" alt="Duara Black Disc Beaded Sandals — EU 37" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Duara Black Disc Beaded Sandals — EU 37</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-firebird-sandals-39-1.jpg?v=1784135399&amp;width=900" alt="Firebird Beaded Leather Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Firebird Beaded Leather Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>20</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-gilded-infinity-sandals-39-1.jpg?v=1784135429&amp;width=900" alt="Gilded Infinity Beaded Leather Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Gilded Infinity Beaded Leather Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-heritage-disc-sandals-41-1.jpg?v=1784135365&amp;width=900" alt="Heritage Disc Beaded Leather Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Heritage Disc Beaded Leather Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-spiral-knot-sandals-42-1.jpg?v=1784133510&amp;width=900" alt="Heritage Spiral Beaded Leather Sandals — EU 42" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Heritage Spiral Beaded Leather Sandals — EU 42</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-beaded-floral-sandals-39-1.jpg?v=1784133440&amp;width=900" alt="Ivory Blossom Beaded Leather Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Ivory Blossom Beaded Leather Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>21</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-03.jpg?v=1784136981&amp;width=900" alt="Jua Ornate Beaded Cuff Sandals — EU 40" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Jua Ornate Beaded Cuff Sandals — EU 40</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-01.jpg?v=1784136968&amp;width=900" alt="Kipepeo Butterfly Beaded Leather Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Kipepeo Butterfly Beaded Leather Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-maasai-shield-sandals-38-1.jpg?v=1784133466&amp;width=900" alt="Maasai Shield Beaded Leather Sandals — EU 38" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Maasai Shield Beaded Leather Sandals — EU 38</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-07.jpg?v=1784137012&amp;width=900" alt="Marigold Floral Beaded Leather Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Marigold Floral Beaded Leather Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>22</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-11.jpg?v=1784137043&amp;width=900" alt="Miale Red &amp; Ivory Beaded Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Miale Red &amp; Ivory Beaded Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-black-paisley-sandals-39-1.jpg?v=1784133523&amp;width=900" alt="Midnight Paisley Beaded Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Midnight Paisley Beaded Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-05.jpg?v=1784136995&amp;width=900" alt="Nuru Ivory Floral Beaded Leather Sandals — EU 40" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Nuru Ivory Floral Beaded Leather Sandals — EU 40</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-rainbow-cuff-sandals-42-1.jpg?v=1784133485&amp;width=900" alt="Rainbow Cuff Beaded Leather Sandals — EU 42" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Rainbow Cuff Beaded Leather Sandals — EU 42</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>23</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-rainbow-feather-sandals-41-1.jpg?v=1784135447&amp;width=900" alt="Rainbow Feather Beaded Leather Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Rainbow Feather Beaded Leather Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-rainbow-halo-sandals-41-1.jpg?v=1784135457&amp;width=900" alt="Rainbow Halo Beaded Leather Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Rainbow Halo Beaded Leather Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-17.jpg?v=1784137091&amp;width=900" alt="Sherehe Ankle-Tie Beaded Leather Sandals — EU 39" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Sherehe Ankle-Tie Beaded Leather Sandals — EU 39</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sunloop-sandals-42-1.jpg?v=1784135415&amp;width=900" alt="Sunloop Beaded Leather Sandals — EU 42" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Sunloop Beaded Leather Sandals — EU 42</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>24</span>
+    </footer>
+    </section>
+
+    <section class="page catalogue-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">COLLECTION CONTINUED</div>
+          <h2>Artisan Sandals</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img class="product-image" src="https://cdn.shopify.com/s/files/1/0714/2631/0218/files/sahara-sandal-batch-15.jpg?v=1784137072&amp;width=900" alt="Upinde Bronze Rainbow Cuff Sandals — EU 41" />
+        <div class="image-fallback">SAHARA</div>
+      </div>
+      <div class="product-copy">
+        <div class="product-type">Sandals</div>
+        <h3>Upinde Bronze Rainbow Cuff Sandals — EU 41</h3>
+        <div class="product-bottom">
+          <span class="price">AED 149</span>
+          <span class="small-batch">SMALL BATCH</span>
+        </div>
+      </div>
+    </article></div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>25</span>
+    </footer>
+    </section>
+
+    <section class="page enquiry-page">
+      <header class="page-header">
+        <div>
+          <div class="kicker">BUYER ENQUIRY</div>
+          <h2>Build your shortlist</h2>
+        </div>
+        <div class="page-brand">SAHARA</div>
+      </header>
+      <p class="enquiry-lead">Mark the products you would like to review, then send the list to Sahara for availability, quantities and a tailored proposal.</p>
+      <table class="enquiry-table">
+        <thead><tr><th>Product / collection</th><th>Qty</th><th>Use / store area</th><th>Notes</th></tr></thead>
+        <tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody>
+      </table>
+      <div class="closing-card">
+        <div>
+          <div class="kicker">LET'S CREATE SOMETHING MEMORABLE</div>
+          <h3>Sahara Shopping</h3>
+          <p>WhatsApp: +971 52 194 8311<br/>Email: hello@sahara.shopping<br/>Web: sahara.shopping<br/>Sharjah, UAE</p>
+        </div>
+        <div class="closing-qr"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAGkCAYAAAB+TFE1AAAAAklEQVR4AewaftIAAAl3SURBVO3B0YlkOxIFwDNJG6Afgfy3TqAfeTD7TNiugrlZVET8+fufAMDDKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA08JM3rTnCZ9nn5ilrjjxln5unrDnyjn1unrLmyKv2uXnHmiN8ln1uXlUBgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIGfPGyfG35nzRH+vTVHnrLmyFP2uflU+9zwO2uOPKUCAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGvjJB1tz5FPtc/OJ1hx50j43T9nn5ilrjvBvrTnyqfa5+UQVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4CXyQNUf4nX1u4BNUAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAM/gX9on5unrDnyjn1unrLmyFPWHHnVPjfw/6oAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0MBPPtg+N3yXNUdetc/Np9rn5lVrjvB7+9zwb1UAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz952Joj8AnWHHnVPjfvWHPkVfvcvGPNkU+15gifowIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz950z438P9ac4Tf2+fmKfvcPGWfG75HBQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADTwkzetOfKOfW5eteYIv7fPzav2uXnHmiPfaM2Rb7TPzTvWHOH39rn5RBUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGvjJF9vnhn9rn5tPtc/NU9YcedU+N+9Yc+Qp+9y8Y82RV+1z86nWHHnVPjdPqQBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwJ+//8mD1hx51T43T1lz5Bvtc/Op1hx5xz43n2jNkXfsc/OUNUe+0T4371hz5Cn73LyqAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4yZvWHOH39rl5ypojr1pz5En73Lxqn5t3rDnyqn1unrLPzTvWHPlU+9x8o31uXrXmyFMqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADTw5+9/8qXWHHnVPjfvWHPkE+1z86Q1R/idfW6esubIt9rn5lVrjnyqfW5eVQGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgAN/Pn7n7xhzZF37HPzqjVH3rHPDb+z5sg79rn5RmuOvGOfG35vzZFX7XPzjjVHXrXPzTvWHHnVPjdPqQBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE++2JojT9nn5lVrjrxjn5tvtObIU/a5ecqaI0/Z5+ZTrTnyjdYcecc+N6+qAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAZ+8sH2uflG+9y8Y82Rp6w58qn2uXnKmiNP2efmKWuOfKp9bp6yz82r1hx5SgUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABn7ywdYceco+N09Zc+Qd+9y8as2RJ+1z86o1R56y5sinWnOEf2vNkXfsc/OqfW6eUgGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgAN/Pn7n8D/ac2RT7XPzTvWHHnKPjevWnPkKfvcfKo1R56yz803qgBAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE/etOYIn2Wfm1ftc/Ot9rl51Zoj71hz5FX73LxjzZGnrDnyjn1unrLPzavWHPlU+9y8qgIADVQAoIEKADRQAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAz952D43/M6aI09Zc+RJ+9w8Zc2RV+1zw+/tc/Op1hx51T4371hz5FX73DylAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4yQdbc+RT7XPD76058qp9bp6y5sg3WnPkW+1z86o1R56y5sg79rl5VQUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABn4C/9A+N+9Yc+Qp+9x8ojVHvtU+N69ac+Qda47wOxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADFQBooAIADVQAoIEKADRQAYAGKgDQwE/gS6w5wu/tc/ON9rl5x5ojT9nn5lVrjjylAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABqoAEADP/lg+9zwb+1z8441R96xz82r1hx5xz43T1lz5FX73LxjzZFX7XPzjjVHvtE+N9+oAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA0UAGABioA0EAFABr4ycPWHOFzrDnyrdYcedU+N+/Y5+Yp+9y8as0Rfm/NkW9UAYAGKgDQQAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBP3//EwB4WAUAGqgAQAMVAGigAgANVACggQoANFABgAYqANBABQAaqABAAxUAaKACAA1UAKCBCgA08D9v/HbqpeT65QAAAABJRU5ErkJggg==" alt="Scan Sahara Shopping"/><span>SCAN THE FULL STORE</span></div>
+      </div>
+      
+    <footer class="footer">
+      <span>SAHARA PRODUCT CATALOGUE &nbsp; | &nbsp; Retail prices in AED &nbsp; | &nbsp; sahara.shopping</span>
+      <span>26</span>
+    </footer>
+    </section></body>
+  </html>
