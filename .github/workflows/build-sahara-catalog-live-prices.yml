@@ -1,0 +1,58 @@
+name: Build Sahara catalogue with live storefront prices
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build-sahara-catalog-live-prices.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull and patch catalogue renderer
+        run: |
+          curl -fsSL "https://raw.githubusercontent.com/ekamaw-ux/Images/sahara-catalog-build/sahara-catalog/render.js" -o sahara-catalog/render.js
+          python sahara-catalog/patch-renderer.py
+
+      - name: Install renderer
+        working-directory: sahara-catalog
+        run: |
+          npm install --no-audit --no-fund
+          npm install cheerio@1.0.0 pdf-lib@1.17.1 --no-save --no-audit --no-fund
+
+      - name: Build catalogue from live store
+        working-directory: sahara-catalog
+        run: |
+          npm run build
+          node compress-catalog.js
+          node split-catalog.js
+
+      - name: Upload final PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sahara_Product_Catalogue_With_Photos_Live_Prices
+          path: sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf
+          retention-days: 7
+
+      - name: Record run and commit catalogue
+        run: |
+          printf '{"run_id": %s, "run_attempt": %s, "commit": "%s"}\n' "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$GITHUB_SHA" > sahara-catalog/run-info-live.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf sahara-catalog/catalogue-preview.html sahara-catalog/pages sahara-catalog/run-info-live.json
+          git commit -m "Generate Sahara catalogue with live storefront prices"
+          git push origin HEAD:main
