@@ -1,4 +1,4 @@
-name: Build Sahara catalogue with live storefront prices
+name: Build Sahara catalogue with storefront prices v2
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         working-directory: sahara-catalog
         run: |
           npm install --no-audit --no-fund
-          npm install cheerio@1.0.0 pdf-lib@1.17.1 --no-save --no-audit --no-fund
+          npm install pdf-lib@1.17.1 --no-save --no-audit --no-fund
 
       - name: Build catalogue from live store
         working-directory: sahara-catalog
@@ -54,5 +54,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf sahara-catalog/catalogue-preview.html sahara-catalog/pages sahara-catalog/run-info-live.json
-          git commit -m "Generate Sahara catalogue with live storefront prices"
+          git commit -m "Generate corrected Sahara catalogue with storefront prices"
           git push origin HEAD:main
