@@ -33,11 +33,45 @@ jobs:
 
       - name: Install renderer
         working-directory: sahara-catalog
-        run: npm install --no-audit --no-fund
+        run: |
+          npm install --no-audit --no-fund
+          npm install pdf-lib@1.17.1 --no-save --no-audit --no-fund
 
       - name: Build PDF with live Shopify images and prices
         working-directory: sahara-catalog
         run: npm run build
+
+      - name: Split catalogue into retrievable page PDFs
+        working-directory: sahara-catalog
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const { PDFDocument } = require('pdf-lib');
+          (async () => {
+            const sourcePath = path.join(process.cwd(), 'Sahara_Product_Catalogue_With_Photos.pdf');
+            const sourceBytes = fs.readFileSync(sourcePath);
+            const source = await PDFDocument.load(sourceBytes);
+            const outputDir = path.join(process.cwd(), 'pages');
+            fs.rmSync(outputDir, { recursive: true, force: true });
+            fs.mkdirSync(outputDir, { recursive: true });
+            const pages = [];
+            for (let index = 0; index < source.getPageCount(); index += 1) {
+              const doc = await PDFDocument.create();
+              const [page] = await doc.copyPages(source, [index]);
+              doc.addPage(page);
+              const bytes = await doc.save({ useObjectStreams: true });
+              const name = `page-${String(index + 1).padStart(3, '0')}.pdf`;
+              fs.writeFileSync(path.join(outputDir, name), bytes);
+              pages.push({ name, bytes: bytes.length });
+            }
+            fs.writeFileSync(path.join(outputDir, 'manifest.json'), JSON.stringify({
+              pageCount: pages.length,
+              sourceBytes: sourceBytes.length,
+              pages,
+            }, null, 2));
+          })().catch((error) => { console.error(error); process.exit(1); });
+          NODE
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
@@ -50,7 +84,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf sahara-catalog/catalogue-preview.html
+          git add sahara-catalog/Sahara_Product_Catalogue_With_Photos.pdf sahara-catalog/catalogue-preview.html sahara-catalog/pages
           if git diff --cached --quiet; then
             echo "Catalogue unchanged"
           else
